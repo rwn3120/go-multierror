@@ -23,6 +23,14 @@ func (me *MultiError) Error() error {
     me.ErrorOrNil()
 }
 
+func (me *MultiError) ErrorsOrNil() []error {
+    if len(me.errors) == 0 {
+        return nil
+    } else {
+        return me.errors
+    }
+}
+
 func (me *MultiError) ErrorOrNil() error {
     if len(me.errors) == 0 {
         return nil
