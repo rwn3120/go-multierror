@@ -9,12 +9,14 @@ type MultiError struct {
     errors []error
 }
 
-func New(errors ...error) {
+func New(errors ...error) *MultiError {
+    me := &MultiError{}
     for _, err := range errors {
         if err != nil {
-            errors = append(errors, err)
+            me.errors = append(me.errors, err)
         }
     }
+    return me
 }
 
 func (me *MultiError) Error() error {
