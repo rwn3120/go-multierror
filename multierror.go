@@ -3,6 +3,7 @@ package multierror
 import (
     "bytes"
     "errors"
+    "fmt"
 )
 
 type MultiError struct {
@@ -12,15 +13,29 @@ type MultiError struct {
 func New(errors ...error) *MultiError {
     me := &MultiError{}
     for _, err := range errors {
-        if err != nil {
-            me.errors = append(me.errors, err)
-        }
+        me.Add(err)
     }
     return me
 }
 
-func (me *MultiError) Error() error {
-    me.ErrorOrNil()
+func NewError(format string, args ...interface{}) *MultiError {
+    err := errors.New(fmt.Sprintf(format, args...))
+    return New(err)
+}
+
+func (me *MultiError) Add(err error) *MultiError {
+    if err != nil {
+        me.errors = append(me.errors, err)
+    }
+    return me
+}
+
+func (me *MultiError) Error() string {
+    err := me.ErrorOrNil()
+    if err != nil {
+        return err.Error()
+    }
+    return ""
 }
 
 func (me *MultiError) ErrorsOrNil() []error {
