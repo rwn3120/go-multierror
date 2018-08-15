@@ -11,19 +11,19 @@ func TestNewEmpty(t *testing.T) {
 
     me := New()
     if me == nil {
-        t.Error("me is nil")
+        t.Fatal("me is nil")
     }
     if me.Error() != "" {
-        t.Error("error is not empty")
+        t.Fatal("error is not empty")
     }
     if me.ErrorOrNil() != nil {
-        t.Error("ErrorOrNil is not nil")
+        t.Fatal("ErrorOrNil is not nil")
     }
     if me.ErrorsOrNil() != nil {
-        t.Error("ErrorsOrNil is not nil")
+        t.Fatal("ErrorsOrNil is not nil")
     }
     if me.Size() != 0 {
-        t.Error("Size is not 0")
+        t.Fatal("Size is not 0")
     }
 }
 
@@ -33,28 +33,28 @@ func TestNew1(t *testing.T) {
     err := errors.New("error1")
     me := New(err)
     if me == nil {
-        t.Error("me is nil")
+        t.Fatal("me is nil")
     }
     if me.Size() != 1 {
-        t.Error("Size is not 1")
+        t.Fatal("Size is not 1")
     }
     if me.Error() != err.Error() {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), err.Error())
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), err.Error())
     }
     if me.ErrorOrNil() == nil {
-        t.Error("ErrorOrNil is nil")
+        t.Fatal("ErrorOrNil is nil")
     }
     if me.ErrorOrNil().Error() != err.Error() {
-        t.Error("ErrorOrNil is nil")
+        t.Fatal("ErrorOrNil is nil")
     }
     if me.ErrorsOrNil() == nil {
-        t.Error("ErrorsOrNil is nil")
+        t.Fatal("ErrorsOrNil is nil")
     }
     if me.ErrorsOrNil()[0] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[0].Error() != err.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err.Error())
     }
 }
 
@@ -66,35 +66,35 @@ func TestNew2(t *testing.T) {
     err2 := errors.New("error2")
     me := New(err1, err2)
     if me == nil {
-        t.Error("me is nil")
+        t.Fatal("me is nil")
     }
     if me.Size() != 2 {
-        t.Error("Size is not 2")
+        t.Fatal("Size is not 2")
     }
     expected := fmt.Sprintf("%s\n%s", err1.Error(), err2.Error())
     if me.Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorOrNil() == nil {
-        t.Error("ErrorOrNil is nil")
+        t.Fatal("ErrorOrNil is nil")
     }
     if me.ErrorOrNil().Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorsOrNil() == nil {
-        t.Error("ErrorsOrNil is nil")
+        t.Fatal("ErrorsOrNil is nil")
     }
     if me.ErrorsOrNil()[0] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[0].Error() != err1.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
     }
     if me.ErrorsOrNil()[1] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[1].Error() != err2.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
     }
 }
 
@@ -106,35 +106,35 @@ func TestNew3(t *testing.T) {
     me := New()
     me.Add(err1, err2)
     if me == nil {
-        t.Error("me is nil")
+        t.Fatal("me is nil")
     }
     if me.Size() != 2 {
-        t.Error("Size is not 2")
+        t.Fatal("Size is not 2")
     }
     expected := fmt.Sprintf("%s\n%s", err1.Error(), err2.Error())
     if me.Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorOrNil() == nil {
-        t.Error("ErrorOrNil is nil")
+        t.Fatal("ErrorOrNil is nil")
     }
     if me.ErrorOrNil().Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorsOrNil() == nil {
-        t.Error("ErrorsOrNil is nil")
+        t.Fatal("ErrorsOrNil is nil")
     }
     if me.ErrorsOrNil()[0] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[0].Error() != err1.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
     }
     if me.ErrorsOrNil()[1] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[1].Error() != err2.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
     }
 }
 
@@ -147,34 +147,34 @@ func TestNew4(t *testing.T) {
     me.Add(err1)
     me.Add(err2)
     if me == nil {
-        t.Error("me is nil")
+        t.Fatal("me is nil")
     }
     if me.Size() != 2 {
-        t.Error("Size is not 2")
+        t.Fatal("Size is not 2")
     }
     expected := fmt.Sprintf("%s\n%s", err1.Error(), err2.Error())
     if me.Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorOrNil() == nil {
-        t.Error("ErrorOrNil is nil")
+        t.Fatal("ErrorOrNil is nil")
     }
     if me.ErrorOrNil().Error() != expected {
-        t.Errorf("unexpected error: %s (expected %s)\n", me.Error(), expected)
+        t.Fatalf("unexpected error: %s (expected %s)\n", me.Error(), expected)
     }
     if me.ErrorsOrNil() == nil {
-        t.Error("ErrorsOrNil is nil")
+        t.Fatal("ErrorsOrNil is nil")
     }
     if me.ErrorsOrNil()[0] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[0].Error() != err1.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
+        t.Fatal("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err1.Error())
     }
     if me.ErrorsOrNil()[1] == nil {
-        t.Error("ErrorsOrNil[0] is nil")
+        t.Fatal("ErrorsOrNil[0] is nil")
     }
     if me.ErrorsOrNil()[1].Error() != err2.Error() {
-        t.Errorf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
+        t.Fatalf("unexpected ErrorsOrNil[0] error: %s (expected %s)\n", me.Error(), err2.Error())
     }
 }
