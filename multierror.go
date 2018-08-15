@@ -12,10 +12,7 @@ type MultiError struct {
 
 func New(errors ...error) *MultiError {
     me := &MultiError{}
-    for _, err := range errors {
-        me.Add(err)
-    }
-    return me
+    return me.Add(errors...)
 }
 
 func NewError(format string, args ...interface{}) *MultiError {
@@ -23,8 +20,8 @@ func NewError(format string, args ...interface{}) *MultiError {
     return New(err)
 }
 
-func (me *MultiError) Add(err error) *MultiError {
-    if err != nil {
+func (me *MultiError) Add(errors ...error) *MultiError {
+    for _, err := range errors {
         me.errors = append(me.errors, err)
     }
     return me
@@ -67,8 +64,4 @@ func (me *MultiError) ErrorOrNil() error {
 
 func (me *MultiError) Size() int {
     return len(me.errors)
-}
-
-func (me *MultiError) Errors() []error {
-    return me.errors
 }
