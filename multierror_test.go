@@ -7,7 +7,8 @@ import (
 )
 
 func TestNewEmpty(t *testing.T) {
-    fmt.Println(t.Name())
+    fmt.Println(t.Name(), "... running")
+
     me := New()
     if me == nil {
         t.Error("me is nil")
@@ -27,7 +28,8 @@ func TestNewEmpty(t *testing.T) {
 }
 
 func TestNew1(t *testing.T) {
-    fmt.Println(t.Name())
+    fmt.Println(t.Name(), "... running")
+
     err := errors.New("error1")
     me := New(err)
     if me == nil {
@@ -58,7 +60,8 @@ func TestNew1(t *testing.T) {
 
 
 func TestNew2(t *testing.T) {
-    fmt.Println(t.Name())
+    fmt.Println(t.Name(), "... running")
+
     err1 := errors.New("error1")
     err2 := errors.New("error2")
     me := New(err1, err2)
@@ -96,7 +99,8 @@ func TestNew2(t *testing.T) {
 }
 
 func TestNew3(t *testing.T) {
-    fmt.Println(t.Name())
+    fmt.Println(t.Name(), "... running")
+
     err1 := errors.New("error1")
     err2 := errors.New("error2")
     me := New()
@@ -135,7 +139,8 @@ func TestNew3(t *testing.T) {
 }
 
 func TestNew4(t *testing.T) {
-    fmt.Println(t.Name())
+    fmt.Println(t.Name(), "... running")
+
     err1 := errors.New("error1")
     err2 := errors.New("error2")
     me := New()
